@@ -5,21 +5,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String[] formula = sc.nextLine().split(" ");
+        System.out.println(calculateRPN(sc.nextLine()));
+    }
+
+    private static Integer calculateRPN(String formula) {
+        Integer x, y;
         Deque<Integer> deque = new ArrayDeque<>();
-        for (String f : formula) {
-            if (f.equals("+")) {
-                deque.addFirst(deque.pollFirst() + deque.pollFirst());
-            } else if (f.equals("-")) {
-                deque.addFirst(deque.pollFirst() - deque.pollFirst());
-            } else if (f.equals("*")) {
-                deque.addFirst(deque.pollFirst() * deque.pollFirst());
-            } else if (f.equals("/")) {
-                deque.addFirst(deque.pollFirst() / deque.pollFirst());
-            } else {
-                deque.addFirst(Integer.parseInt(f));
+        for (String f : formula.split(" ")) {
+            switch (f) {
+                case "+":
+                    x = deque.pollFirst();
+                    y = deque.pollFirst();
+                    deque.addFirst(y + x);
+                    break;
+                case "-":
+                    x = deque.pollFirst();
+                    y = deque.pollFirst();
+                    deque.addFirst(y - x);
+                    break;
+                case "*":
+                    x = deque.pollFirst();
+                    y = deque.pollFirst();
+                    deque.addFirst(y * x);
+                    break;
+                case "/":
+                    x = deque.pollFirst();
+                    y = deque.pollFirst();
+                    deque.addFirst(y / x);
+                    break;
+                default:
+                    deque.addFirst(Integer.parseInt(f));
             }
         }
-        System.out.println(deque.pollFirst());
+        return deque.pollFirst();
     }
 }
