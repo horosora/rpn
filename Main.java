@@ -8,6 +8,8 @@ public class Main {
         System.out.println(calculateRPN(sc.nextLine()));
     }
 
+    // 数値ならスタックに積む
+    // 記号ならスタックから2つの数値を取り出して計算後スタックに積む
     private static Integer calculateRPN(String formula) {
         Integer x, y;
         Deque<Integer> deque = new ArrayDeque<>();
